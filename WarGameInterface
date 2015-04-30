@@ -1,0 +1,109 @@
+/**
+interface for the wargame class
+
+*/
+
+public interface WarGameInterface
+{
+    /**
+   Deal method splits a deck into two equal parts and puts them into handA and handB, two arraylists
+   
+   @param Deck d
+   */
+   
+   
+   public void Deal(Deck d);
+
+
+     /**
+   flip method takes in two card objects and compares them to each other,which ever card's rank
+   is larger gets both Card a and Card b added to the back of their arraylist. if Card a is higher 
+   return string "A" and if Card b is higher return String "B"
+   
+   @param
+   */
+   
+   public String flip(Card a, Card b);
+   
+     /**
+      war method only happens when cards are already tied, get the "burn" card, the card faced down
+      and the next two Cards that will be flipped and flip them to get the returned String from flip()
+      if "A" a wins, if "B" b wins the war
+      
+      @param the same Cards a and b that were put in the flip method
+      */
+      
+      public void war(Card a, Card b);
+
+         /**
+        getAHandSize returns the amount of objects in the handA arraylist
+        
+        @return handA.size();
+        */
+        public int getAHandSize();
+        
+              /**
+        getBHandSize returns the amount of objects in the handB arraylist
+        
+        @return handB.size();
+        */
+        
+         public int getBHandSize();
+
+         /**
+        getApic method returns the location of top cards picture
+        
+        @return a String of the picture location
+        */
+        
+        
+        public String getApic();
+        
+        
+        /**
+        getBpic method returns the location of top cards picture
+        
+        @return a String of the picture location
+        */
+        
+         public String getBpic();
+
+
+         /**
+        
+        getTopA returns the top card of a as long as it is not empty, if it is 
+        refer to noCards method
+        
+        
+        @return Card top card
+        */
+           
+        public Card getTopA();
+
+
+
+      /**
+        
+        getTopB returns the top card of a as long as it is not empty, if it is 
+        refer to noCards method
+        
+        
+        @return Card top card
+        */
+        
+         public Card getTopB();
+
+
+
+      /**
+        no cards class displays a message dialog that either hand a or b loses
+        if they run out of cards
+        
+        @param String 0 is the idenetifier of the empty hand
+        */
+        
+        
+        
+        public void noCards(String o);
+
+}

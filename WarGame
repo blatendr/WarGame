@@ -1,0 +1,198 @@
+import java.util.ArrayList;
+import javax.swing.*;
+
+public class WarGame extends Deck 
+{////
+   
+
+   private ArrayList<Card> winnings = new ArrayList<>();
+   ArrayList<Card> handA = new ArrayList<>();
+   ArrayList<Card> handB = new ArrayList<>();
+   
+   private Card warCardA, warCardB; 
+
+   
+   public WarGame()
+      {
+      Deck d = new Deck();
+      d.Shuffle();
+      Deal(d);        
+      }
+   
+     public void Deal(Deck deck)
+   {
+      
+      for (int i = 1;i < 52;i+=2)
+         handA.add(deck.get(i));
+      
+      for (int j = 0;j < 52;j+=2)
+         handB.add(deck.get(j));
+   
+   }
+   
+   
+   public String flip(Card a, Card b)
+      {////
+      
+      if (a.getRank() > b.getRank())
+         {
+       Card tempA = handA.get(0);
+       handA.remove(0);
+       
+       Card tempB = handB.get(0);
+       handB.remove(0);
+       
+       handA.add(tempA);
+       handA.add(tempB);
+       
+       int winSize = winnings.size();
+       for (int i = 0; i < winSize; i++)
+            {
+            handA.add(winnings.get(i));
+            
+            }
+       
+       winnings.clear();
+       
+       System.out.println(tempA.toString()+" beats " + tempB.toString()+" A wins");
+       return "A";
+         }
+      else if (b.getRank() > a.getRank())
+         {
+         Card tempA = handA.get(0);
+         handA.remove(0);
+       
+         Card tempB = handB.get(0);
+         handB.remove(0);
+       
+         handB.add(tempA);
+         handB.add(tempB);
+         
+         int winSize = winnings.size();
+
+          for (int i = 0; i < winSize; i++)
+            {
+            handB.add(winnings.get(i));
+            
+            }
+         winnings.clear();
+         System.out.println(tempB.toString()+" beats " + tempA.toString()+" B wins");
+         
+         return "B";
+         
+         } 
+      else
+         {
+         
+         System.out.println("WAR!");
+         System.out.println(a.toString()+" ties " + b.toString()+" B wins");war(a,b);
+         
+         
+         }
+      
+      return "game is a tie";
+      }////
+      
+      
+      public void war(Card a, Card b)
+         {
+         
+         handA.remove(0);
+         handB.remove(0);
+         
+         
+         Card burnCardA = handA.get(0);
+         Card burnCardB = handB.get(0);
+         handA.remove(0);
+         handB.remove(0);
+         
+         winnings.add(a);
+         winnings.add(b);
+         winnings.add(burnCardA);
+         winnings.add(burnCardB);
+         
+         warCardA = getTopA();
+         warCardB = getTopB();
+         
+         String winner = flip(warCardA,warCardB);
+         
+
+         
+         if (winner == "A")
+            {
+              
+               System.out.println("A wins after a tie");          
+            
+            }
+         else if (winner == "B")
+            {
+            
+            System.out.println("B wins after a tie"); 
+            
+             }
+          
+        }
+        
+        public int getAHandSize()
+         {
+         return handA.size();
+         }
+        
+         public int getBHandSize()
+         {
+         return handB.size();
+         }
+        
+        public String getApic()
+            {
+            return warCardA.getCardPic();
+            
+            }
+        
+         public String getBpic()
+            {
+            return warCardB.getCardPic();
+            
+            }
+        
+        public Card getTopA()
+            {
+            if (handA.isEmpty())
+               {
+               noCards("A");
+               
+               }
+            return handA.get(0);
+            
+            }
+        
+         public Card getTopB()
+            {
+            if (handB.isEmpty())
+               {
+               noCards("B");
+               
+               }
+            return handB.get(0);
+            
+            }
+        
+            public void noCards(String o)
+            {
+               if (o.equals("A")){
+                  JOptionPane.showMessageDialog(null, "Player A is out of cards, Player B wins");
+               }
+               else if (o.equals("B")){
+                  JOptionPane.showMessageDialog(null, "Player B is out of cards, Player A wins");
+               }
+
+                   System.exit(0);
+            }
+        
+        
+        
+        
+        
+        } 
+         
+         

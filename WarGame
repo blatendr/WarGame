@@ -1,16 +1,30 @@
+/**
+class WarGame sets up methods need for WarGameGUI
+
+*/
+
+
+//import needed java files
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class WarGame extends Deck 
+public class WarGame extends Deck implements WarGameInterface
 {////
    
-
+   //set up three arraylists, one for cards kept in limbo and one for each hand
    private ArrayList<Card> winnings = new ArrayList<>();
-   ArrayList<Card> handA = new ArrayList<>();
-   ArrayList<Card> handB = new ArrayList<>();
+   private ArrayList<Card> handA = new ArrayList<>();
+   private ArrayList<Card> handB = new ArrayList<>();
    
+   //constants for later
    private Card warCardA, warCardB; 
 
+   /**
+   WarGame default constructor initiliazes a deck, shuffles it, and calls a deal method used later
+   
+   
+   */
+   
    
    public WarGame()
       {
@@ -19,22 +33,37 @@ public class WarGame extends Deck
       Deal(d);        
       }
    
-     public void Deal(Deck deck)
-   {
+   /**
+   Deal method splits a deck into two equal parts and puts them into handA and handB, two arraylists
+   
+   @param Deck d
+   */
+   
+   public void Deal(Deck d)
+      {
       
       for (int i = 1;i < 52;i+=2)
-         handA.add(deck.get(i));
+         handA.add(d.get(i));
       
       for (int j = 0;j < 52;j+=2)
-         handB.add(deck.get(j));
+         handB.add(d.get(j));
    
-   }
+      }
+   
+   
+   /**
+   flip method takes in two card objects and compares them to each other,which ever card's rank
+   is larger gets both Card a and Card b added to the back of their arraylist. if Card a is higher 
+   return string "A" and if Card b is higher return String "B"
+   
+   @param
+   */
    
    
    public String flip(Card a, Card b)
       {////
       
-      if (a.getRank() > b.getRank())
+      if (a.getRank() > b.getRank())//if card from hand a is bigger
          {
        Card tempA = handA.get(0);
        handA.remove(0);
@@ -46,6 +75,7 @@ public class WarGame extends Deck
        handA.add(tempB);
        
        int winSize = winnings.size();
+       //add any cards that were involved in a war
        for (int i = 0; i < winSize; i++)
             {
             handA.add(winnings.get(i));
@@ -57,7 +87,7 @@ public class WarGame extends Deck
        System.out.println(tempA.toString()+" beats " + tempB.toString()+" A wins");
        return "A";
          }
-      else if (b.getRank() > a.getRank())
+      else if (b.getRank() > a.getRank())//if card from b is bigger
          {
          Card tempA = handA.get(0);
          handA.remove(0);
@@ -69,7 +99,8 @@ public class WarGame extends Deck
          handB.add(tempB);
          
          int winSize = winnings.size();
-
+         
+         //add any cards that were involved in a war
           for (int i = 0; i < winSize; i++)
             {
             handB.add(winnings.get(i));
@@ -83,9 +114,10 @@ public class WarGame extends Deck
          } 
       else
          {
-         
+         //cards are the same, put the Card objects a and b into the war method
          System.out.println("WAR!");
-         System.out.println(a.toString()+" ties " + b.toString()+" B wins");war(a,b);
+         System.out.println(a.toString()+" ties " + b.toString()+" B wins");
+         war(a,b);
          
          
          }
@@ -93,7 +125,13 @@ public class WarGame extends Deck
       return "game is a tie";
       }////
       
+      /**
+      war method only happens when cards are already tied, get the "burn" card, the card faced down
+      and the next two Cards that will be flipped and flip them to get the returned String from flip()
+      if "A" a wins, if "B" b wins the war
       
+      @param the same Cards a and b that were put in the flip method
+      */
       public void war(Card a, Card b)
          {
          
@@ -133,15 +171,33 @@ public class WarGame extends Deck
           
         }
         
+        /**
+        getAHandSize returns the amount of objects in the handA arraylist
+        
+        @return handA.size();
+        */
         public int getAHandSize()
          {
          return handA.size();
          }
         
+        /**
+        getBHandSize returns the amount of objects in the handB arraylist
+        
+        @return handB.size();
+        */
+        
          public int getBHandSize()
          {
          return handB.size();
          }
+        
+        /**
+        getApic method returns the location of top cards picture
+        
+        @return a String of the picture location
+        */
+        
         
         public String getApic()
             {
@@ -149,11 +205,27 @@ public class WarGame extends Deck
             
             }
         
+         /**
+        getBpic method returns the location of top cards picture
+        
+        @return a String of the picture location
+        */
+        
          public String getBpic()
             {
             return warCardB.getCardPic();
             
             }
+        /**
+        
+        getTopA returns the top card of a as long as it is not empty, if it is 
+        refer to noCards method
+        
+        
+        @return Card top card
+        */
+        
+        
         
         public Card getTopA()
             {
@@ -166,6 +238,15 @@ public class WarGame extends Deck
             
             }
         
+          /**
+        
+        getTopB returns the top card of a as long as it is not empty, if it is 
+        refer to noCards method
+        
+        
+        @return Card top card
+        */
+        
          public Card getTopB()
             {
             if (handB.isEmpty())
@@ -177,7 +258,16 @@ public class WarGame extends Deck
             
             }
         
-            public void noCards(String o)
+        /**
+        no cards class displays a message dialog that either hand a or b loses
+        if they run out of cards
+        
+        @param String 0 is the idenetifier of the empty hand
+        */
+        
+        
+        
+        public void noCards(String o)
             {
                if (o.equals("A")){
                   JOptionPane.showMessageDialog(null, "Player A is out of cards, Player B wins");
@@ -187,7 +277,7 @@ public class WarGame extends Deck
                }
 
                    System.exit(0);
-            }
+          }
         
         
         

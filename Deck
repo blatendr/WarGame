@@ -1,0 +1,99 @@
+/**
+Deck class 
+
+*/
+
+
+
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Deck extends Card implements DeckInterface
+{
+   /**
+   initialize deck arraylist and need private constants
+   
+   */
+   private int CARDS_IN_SUIT =13, SUITS_IN_DECK = 4;
+   ArrayList<Card> deck = new ArrayList<>();
+   
+
+   
+   Random rand = new Random();
+   /**
+   default constructor that creates a deck of cards with for loops
+   
+   */
+   
+   public Deck()  
+   {
+   for (int i = 1;i <= SUITS_IN_DECK;i++)
+      {
+      for (int j = 1;j <= CARDS_IN_SUIT;j++)
+         {
+         Card c = new Card(j,i);
+         deck.add(c);
+         
+         }
+      
+      } 
+   
+   
+   }
+
+   /**
+   Shuffle method uses shuffle method from java.Collections to "shuffle" the deck arraylist
+   
+   */
+   public void Shuffle()
+      {
+      Collections.shuffle(deck);
+      
+      }
+   /**
+   get method returns the card at a certain index i the array list
+   
+   @param int i for indexing arraylist
+   @return Card object at top of arraylist
+   */
+   
+   
+   public Card get(int i)
+      {
+      
+      return deck.get(i);
+      
+      }
+   
+      /**
+      getTop method returns the Card object at the top of the deck arraylist
+      
+      @return Card at top of deck
+      */
+   
+       
+       public Card getTop()
+         {
+         
+         return deck.get(0);
+         
+         }
+       
+       /**
+       isEmpty checks is the deck has any cards left in it 
+       
+       @returns boolean true is deck is empty
+       */
+       
+       
+       public boolean isEmpty()
+      {
+        return (deck.size() == 0);
+      }
+
+
+
+}
+
+

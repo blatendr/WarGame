@@ -1,0 +1,46 @@
+/**
+Deck Interface
+
+*/
+
+public interface DeckInterface
+{
+ 
+
+   /**
+   Shuffle shuffles the deck via the Shuffle method from java.Collections
+   
+   */
+   
+   public void Shuffle();
+   
+   
+   /**
+   get method accepts a param int and uses it as an index to return a card in the deck
+   
+   @param int i (for index)
+   @return Card at index i
+   
+   */
+   
+   public Card get(int i);
+   
+   /**
+   getTop returns the top most card in the deck
+   
+   @return card at index 0
+   */
+   
+   public Card getTop();
+   
+   
+   /**
+   isEmpty method sees if there is any cards left in the deck
+   
+   @return true if deck isEmpty
+   
+   */
+   
+   public boolean isEmpty();
+   
+}

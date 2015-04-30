@@ -1,0 +1,174 @@
+/**
+class Card sets a rank and suit for a card object and returns it as an int or a string
+
+*/
+public class Card implements CardInterface
+{
+   
+   //set up public and private constants
+   public final int SPADES=4, CLUBS=1, HEARTS=3, DIAMONDS=2, ACE = 1,JACK=11,QUEEN = 12,KING=13;
+   private int rank, suit;
+   private String pic;
+   /**
+   Constructor accepts two integers for rank and suit
+   @param int r = rank, int s = suit
+   */
+   
+   public Card()
+   {
+   rank = 1;
+   suit = 1;
+   
+   }
+   
+   public Card(int r, int s)
+   {
+   rank = r;
+   suit = s;
+   
+   pic = "cardpics/" +rank+suit+".jpg";
+   
+   }
+   
+   public Card(Card c) 
+   {
+   rank = c.getRank();
+   suit = c.getSuit();
+   
+   }
+   
+   
+   
+   
+   /**
+   getter that returns the suit as an int
+   @return suit (int)
+   */
+   
+   public int getSuit()
+   {
+   return suit;
+   }
+
+   /**
+   getter that returns the rank as an int
+   @return rank (int)
+   */
+
+   
+   public int getRank()
+   {
+   return rank;
+   }
+
+   /**
+   Getter that returns suit as a String
+   @return "Spades," "Hearts," "Diamonds," "Clubs," "invalid"
+   */
+   
+   public String getSuitAsString()
+   {
+      switch (suit)
+      {
+      case SPADES:
+         return "Spades";
+      case HEARTS:
+         return "Hearts";
+      case DIAMONDS:
+         return "Diamonds";
+      case CLUBS:
+         return "Clubs";
+      default:
+         return "invalid";
+      }
+   }
+   
+   /**
+   method that gets rank as a String
+   @return String name, "Ace," "Two," ... ect
+   */
+   
+   
+   public String getRankAsString()
+   {
+      switch (rank)
+      {
+      case ACE:
+         return "Ace";
+      case 2:
+         return "Two";
+      case 3:
+         return "Three";
+      case 4:
+         return "Four";
+      case 5:
+         return "Five";
+      case 6:
+         return "Six";
+      case 7:
+         return "Seven";
+      case 8:
+         return "Eight";
+      case 9:
+         return "Nine";
+      case 10:
+         return "Ten";
+      case JACK:
+         return "Jack";
+      case QUEEN:
+         return "Queen";
+      case KING:
+         return "King";
+       default:   
+         return "invalid rank";
+      }
+   }   
+   
+   /**
+   Method toString returns a displayable string
+   @return the value from getRankAsString() +" of " +  the value stored in getSuitAsString();
+
+
+   
+   */
+   
+   
+   public String toString()
+   {
+   return getRankAsString() +" of " + getSuitAsString();
+   
+   }
+   
+   /**
+   method that tests if one Card object is equal to an other Card object
+   @return boolean true if object one equals object two, false if not
+   */
+   
+   public boolean equals(Card c)
+   {
+   if (( rank != c.rank))
+      return false;
+   else
+      return true;
+   }
+
+   public boolean greater(Card c)
+   {
+   if (rank > c.getRank())
+      return true;
+   else  
+      return false;
+   
+   }
+
+public String getCardPic()
+   {
+   return pic;
+   
+   
+   }
+
+
+}
+
+

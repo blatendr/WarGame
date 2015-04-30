@@ -1,0 +1,65 @@
+/**
+the interface for the card class
+
+
+*/
+
+
+public interface CardInterface {
+    /**
+      Returns the suit of the card
+     
+     @return an int that represents suit
+     */
+    public int getSuit();
+
+    /**
+      returns the rank of the card.
+      
+      @return an int that represents rank
+           */
+    
+    public int getRank();
+
+    /**
+      Returns a string that represents the suit of th card
+      
+      @return String for the cards suit
+     */
+    
+    
+    public String getSuitAsString();
+
+    
+    
+    /**
+     returns the rank of a card as a string
+      
+      @return a String that represents a suit
+     */
+    public String getRankAsString();
+
+    
+    /**
+    
+      toString method returns string version of a cards rank and suit
+      
+      @return a String that represents the cards rank and suit
+     */
+    public String toString();
+
+    /**
+      Compares two cards to determine if they have the same rank
+      
+      @param Card c
+      @return boolean true if the two cards have the same rank
+     */
+    public boolean equals(Card c);
+
+    /**
+      Retrieves the String that hold the location of the cards picture
+     
+      @return String of picture location 
+           */
+    public String getCardPic();
+}

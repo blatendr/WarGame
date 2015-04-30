@@ -1,0 +1,172 @@
+/**
+Brad Latendresse
+WarGameGui
+
+*/
+
+
+//import need java files
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.JLayeredPane;
+import java.awt.Container;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+//Creates the JFrame.
+
+
+public class WarGameGUI extends JFrame{
+    private WarGame game;                                       //set up a  WarGame
+    private JButton playButton;                                //Plays one round of war
+
+    private static final String BLANK = "cardPics/back.jpg";    //Path to image of card back
+    
+    JPanel panel;                                              //set up the panel for the GUI
+    BorderLayout frame = new BorderLayout();                   //set border layout
+    JLabel ACardPic;                                           //initilaize JLabels for ACardPic and BCardPic;
+    JLabel BCardPic;
+
+      
+ 
+    private String cont = "stop";                               //keep track of what the program is doing
+
+
+
+    /**
+     * The constructor for the JFrame, creates the contentPane layout, size, and standard features. Then creates the
+     * appropriate components and assembles them. The cardsPanel is created with empty images because the players have not yet
+     * played a card.
+     *
+     */
+    public WarGameGUI()
+    {
+        
+        
+        //initializ the WarGame
+        game = new WarGame();
+        
+        //set up the button which will start every round
+        playButton = new JButton("Play Card");
+        playButton.setPreferredSize(new Dimension(10,5));
+         
+         //set up the panel for the program
+         panel = new JPanel(new BorderLayout(200,200));
+         JFrame frame = new JFrame();
+         //add the button to the panel
+         panel.add(playButton,BorderLayout.CENTER);
+        
+        
+       
+        
+        //call the actionlistener
+        playButton.addActionListener(new PlayCardListener());
+         
+         //add the panel to the GUI
+         add(panel);
+            
+         setVisible(true);//make it visible
+}
+     private class PlayCardListener implements ActionListener
+     {
+        public void actionPerformed(ActionEvent e)
+        {
+                  
+              
+           
+              
+             
+                
+                
+                
+                if (cont.equals("stop"))
+                {
+                //Draw cards.
+                Card ACard = game.getTopA();
+                Card BCard = game.getTopB();
+
+                //Get the cards images
+                ACardPic = new JLabel(new ImageIcon(ACard.getCardPic()));
+                
+                panel.add(ACardPic,BorderLayout.EAST);
+
+                BCardPic = new JLabel(new ImageIcon(BCard.getCardPic()));
+                panel.add(BCardPic,BorderLayout.WEST);
+                
+                
+                //Call a flip
+                game.flip(ACard, BCard);
+                 panel.setBackground(Color.blue);
+                
+                
+                 setVisible(true);
+                if (ACard.equals(BCard)){
+                    //Set cont to go to allow the program to continue
+                    
+                    cont = "go";
+                    
+                //add card pics to pannel
+                panel.add(BCardPic,BorderLayout.CENTER);
+                
+                //when a war happens make the background red
+                panel.setBackground(Color.red);
+                 setVisible(true);
+                }
+                  
+                  
+                if (cont.equals("go"))
+                {
+                ImageIcon aCard = new ImageIcon(BLANK);
+                
+                ACardPic = new JLabel(aCard); 
+              
+              
+                panel.add(ACardPic,BorderLayout.CENTER);
+                
+                ImageIcon bCard = new ImageIcon(BLANK);
+                
+                BCardPic = new JLabel(bCard); 
+                panel.add(BCardPic,BorderLayout.CENTER);
+                
+                panel.add(BCardPic,BorderLayout.EAST);
+                
+                
+                cont = "stop";
+                 setVisible(true);
+                }
+                
+
+                  
+                  
+                  
+                //show the scores of the hands (how many cards are left)
+                if (!cont.equals("go")){
+                    JLabel acards = new JLabel("Player's Cards: " + (game.getAHandSize() - 1));
+                    JLabel bcards = new JLabel("Computer's Cards: " + (game.getBHandSize() - 1));
+                     
+                    panel.add(acards,BorderLayout.SOUTH);
+                    panel.add(bcards,BorderLayout.SOUTH); 
+                   setVisible(true);
+                  
+                
+                }
+            
+            
+            }
+    
+     }
+ 
+    
+    
+    }
+    
+    //set up a main to run the program
+       public static void main(String[] args) {
+        WarGameGUI guiGame = new WarGameGUI();
+    }
+    
+    
+    }
+    
+     
